@@ -7,14 +7,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "themoviedb-Glo"
+    "url": "themoviedb-glo"
   },
   "keywords": [
     "testing"
   ],
   "author": "ww7",
   "license": "ISC",
-  "description": "",
+  "description": "testing API",
   "devDependencies": {
     "eslint": "^5.16.0"
   }

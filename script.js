@@ -32,15 +32,44 @@ function requestApi(method, url){
     let inner = '';
 
     output.results.forEach(function(item){
-      let nameItem = item; //item.name || item.title;
-      console.log(nameItem);
-      inner += `<div class="col-3">${nameItem}</div>`;
+      let nameItem = item.name || item.title,
+          dateItem = item.release_date || item.first_air_date,
+          idItem = item.id,
+          posterItem = item.poster_path,
+          media_type = item.media_type,
+          original_language = item.original_language;
+      let url = convertToSlug(idItem + "-" + nameItem);
+
+      if (media_type === "movie"){
+        url = "movie/" + url;
+      }
+      else if (media_type === "tv"){
+        url = "tv/" + url;
+      }
+
+      inner += `<div class="col-4">
+      <div style="text-align: center; padding: 10px 0 20px 0;">
+        <div><a href=https://www.themoviedb.org/${url}><img style="max-width: 100%;" src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/${posterItem}"></a></div>
+        <div class=""><a href=https://www.themoviedb.org/${url}>${nameItem}</a></div>
+          <span class="">${dateItem}</span>
+          <span class="">(${media_type})</span>
+          <span class="">(${original_language})</span>
+        </div>
+      </div>`;
+      // console.log(item);
     });
-
+    
     movies.innerHTML = inner;
-
-    // console.log(output);
 });
+
+  function convertToSlug(Text)
+    {
+      return Text
+        .toLowerCase()
+        .replace(/ /g,'-')
+        .replace(/[^\w-]+/g,'')
+        ;
+    }
 
 }
 
